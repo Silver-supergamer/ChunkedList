@@ -12,7 +12,7 @@ template<typename T, size_t ChunkSize = 16>
 class ChunkedList {
     static_assert(ChunkSize > 0, "Chunk Size must be greater than 0");
   private:
-    size_t chunkCount = 1;
+    size_t chunkCount{1};
     
     class Chunk {
       private:
@@ -28,10 +28,10 @@ class ChunkedList {
         
         ~Chunk();
         
-        int nextIndex = 0;
+        int nextIndex{0};
         
-        Chunk *nextChunk = nullptr;
-        Chunk *prevChunk = nullptr;
+        Chunk *nextChunk{nullptr};
+        Chunk *prevChunk{nullptr};
         
         inline T &operator[](int index);
         
@@ -40,8 +40,8 @@ class ChunkedList {
     
     class Iterator {
       private:
-        Chunk *chunk = nullptr;
-        int index = 0;
+        Chunk *chunk{nullptr};
+        int index{0};
       public:
         ~Iterator() = default;
         
@@ -61,8 +61,8 @@ class ChunkedList {
     
     using ChunkIterator = const Chunk *;
     
-    Chunk *front = nullptr;
-    Chunk *back = nullptr;
+    Chunk *front{nullptr};
+    Chunk *back{nullptr};
     
     inline void pushChunk(Chunk *chunk);
   
